@@ -9,13 +9,13 @@ import java.util.Scanner;
 /**
  * Esta clase Main actúa como un launcher para lanzar el Servidor y varios Clientes.
 
- * Usa ProcessBuilder para abrir estos procesos en hilos separados y en una nueva terminal.
+ * Usa ProcessBuilder para abrir estos procesos en procesos separados y en una nueva terminal.
  */
 public class Main {
     // Constante de tiempo espera
     final static int TIEMPO_ESPERA = 1250;
     // Constantes nombres clases
-    final static String servidor = "Servidor.java", cliente = "Cliente.java";
+    final static String servidor = "ut3.act3.Servidor", cliente = "ut3.act3.Cliente";
     // Num. de servidores máximos
     static int numeroServidores = 1;
     // Listado de procesos que se crean

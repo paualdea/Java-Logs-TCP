@@ -2,6 +2,8 @@ package ut3.act3;
 
 // IMPORTS
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -16,6 +18,8 @@ public class Main {
     final static String servidor = "Servidor.java", cliente = "Cliente.java";
     // Num. de servidores máximos
     static int numeroServidores = 1;
+    // Listado de procesos que se crean
+    static List<Process> procesos = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
         String opcion = "";
@@ -44,12 +48,26 @@ public class Main {
 
                 espera(0);
             } else if (opcion.equals("2")) {
-                // Lanzamos un proceso de cliente
-                lanzarProceso(cliente);
+                // Si se ha creado un servidor, ejecutamos el cliente
+                if (numeroServidores == 0) {
+                    // Lanzamos un proceso de cliente
+                    lanzarProceso(cliente);
 
-                System.out.println("Lanzando cliente...");
+                    System.out.println("Lanzando cliente...");
+                }
+                // Si no hay servidor, avisar al usuario
+                else {
+                    System.out.println("\nLanza primero un servidor.");
+                }
+
                 espera(0);
             } else if (opcion.equals("3")) {
+                // Recorremos todos los procesos y los cerramos al salir
+                for (int i = 0; i < procesos.toArray().length; i++) {
+                    // Intentamos cerrar el proceso
+                    procesos.get(i).destroy();
+                }
+
                 System.out.println("\nCerrando programa...");
                 espera(0);
             } else {
@@ -75,12 +93,16 @@ public class Main {
         if (os.contains("win")) {
             // Creamos un proceso con ProcessBuilder que lanza con el cmd una nueva ventana de la clase
             ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "start", "Servicio de Logs", java, "-cp", ruta, clase);
-            // Iniciamos el ProcessBuilder
-            pb.start();
+            // Iniciamos el ProcessBuilder creando un proceso que añadimos a la lista procesos
+            Process proceso = pb.start();
+            procesos.add(proceso);
         } else {
             // Creamos un ProcessBuilder que lanza en sistemas Linux y macOS una nueva ventana apuntando a la clase Java
             ProcessBuilder pb = new ProcessBuilder("x-terminal-emulator", "-fa", "Monospace", "-fs", "12","-e", java + " -cp " + ruta + " " + clase);
-            pb.start();
+
+            // Creamos el proceso y lo guardamos en la lista de procesos
+            Process proceso = pb.start();
+            procesos.add(proceso);
         }
     }
 

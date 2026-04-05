@@ -24,6 +24,7 @@ public class Servidor {
                 new Thread(new hiloServidor(socket)).start();
             }
         }
+
         catch (IOException e) {
             System.err.println("\nServidor ya en ejecución");
         }

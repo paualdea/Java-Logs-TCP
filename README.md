@@ -26,7 +26,7 @@ El programa sigue el siguiente flujo de ejecución:
 
 ## Instrucciones de Uso
 
-Para ejecutar este programa, se puede usar el fichero `.jar` o compilar el *código fuente* que se pueden descargar desde las [releases]() del proyecto.
+Para ejecutar este programa, se puede usar el fichero `.jar` o compilar el *código fuente* que se pueden descargar desde las [releases](https://git.paualdea.com/paualdea/Java-Logs-TCP/-/releases) del proyecto.
 
 ---
 Este proyecto sirve como evidencia del aprendizaje sobre el desarrollo de aplicaciones distribuidas, gestión de concurrencia y comunicaciones seguras en red para la asignatura de **Programación de Servicios y Procesos**.

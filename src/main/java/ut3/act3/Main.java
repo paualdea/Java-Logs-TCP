@@ -16,8 +16,6 @@ public class Main {
     final static int TIEMPO_ESPERA = 1250;
     // Constantes nombres clases
     final static String servidor = "ut3.act3.Servidor", cliente = "ut3.act3.Cliente";
-    // Num. de servidores máximos
-    static int numeroServidores = 1;
     // Listado de procesos que se crean
     static List<Process> procesos = new ArrayList<>();
 
@@ -26,54 +24,43 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         // Mientras la opción no sea 3
-        while (!opcion.equals("3")) {
+        while (!opcion.equals("2")) {
+            // Lanzamos el proceso servidor (max. 1 servidor)
+            try {
+                lanzarProceso(servidor);
+            } catch (Exception ignored) {}
+
             // Limpiamos la pantalla
             limpiarPantalla();
 
             // Mostramos el menú de selección al usuario
-            System.out.print("\t\t\n.:SISTEMA DE LOGS EN RED:.\n\n1. Iniciar servidor (max. 1)\n2. Iniciar cliente\n3. Salir\n\nOpción: ");
+            System.out.print("\t\t\n.:SISTEMA DE LOGS EN RED:.\n\n1. Iniciar cliente\n2. Salir\n\nOpción: ");
             opcion = sc.nextLine();
 
-            // Estructura de selección
-            if (opcion.equals("1")) {
-                // Lanzamos el proceso servidor (max. 1)
-                if (numeroServidores == 1) {
-                    lanzarProceso(servidor);
-                    numeroServidores--;
-
-                    System.out.println("Lanzando servidor...");
-                } else {
-                    System.out.println("\nSólo se puede crear un servidor.");
-                }
-
-                espera(0);
-            } else if (opcion.equals("2")) {
-                // Si se ha creado un servidor, ejecutamos el cliente
-                if (numeroServidores == 0) {
+            // Implementamos un switch para decidir en función de la opción
+            switch (opcion) {
+                case "1":
                     // Lanzamos un proceso de cliente
                     lanzarProceso(cliente);
-
                     System.out.println("Lanzando cliente...");
-                }
-                // Si no hay servidor, avisar al usuario
-                else {
-                    System.out.println("\nLanza primero un servidor.");
-                }
 
-                espera(0);
-            } else if (opcion.equals("3")) {
-                // Recorremos todos los procesos y los cerramos al salir
-                for (int i = 0; i < procesos.toArray().length; i++) {
-                    // Intentamos cerrar el proceso
-                    procesos.get(i).destroy();
-                }
+                    break;
+                case "2":
+                    // Recorremos todos los procesos y los cerramos al salir
+                    for (int i = 0; i < procesos.toArray().length; i++) {
+                        // Intentamos cerrar el proceso
+                        procesos.get(i).destroy();
+                    }
 
-                System.out.println("\nCerrando programa...");
-                espera(0);
-            } else {
-                System.out.println("\nOpción incorrecta");
-                espera(0);
+                    System.out.println("\nCerrando programa...");
+                    break;
+                default:
+                    System.out.println("\nOpción incorrecta");
+                    break;
             }
+
+            // Hacemos una espera
+            espera(0);
         }
     }
 

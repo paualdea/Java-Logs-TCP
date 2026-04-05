@@ -19,7 +19,7 @@ public class hiloServidor implements Runnable {
         // Implementación de estructura try-with-resources
         try (
                 // Creamos el lector del socket
-                BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                BufferedReader lector = new BufferedReader(new InputStreamReader(socket.getInputStream()))
         ) {
             //  Leemos el nombre de usuario que manda el cliente
             String usuario = lector.readLine();
@@ -30,7 +30,7 @@ public class hiloServidor implements Runnable {
                 System.out.println("\n\t[CONEXIÓN] " + usuario + " se ha unido.\n");
 
                 // Implementamos un while que pida logs indefinidamente, hasta que reciba 'SALIR'
-                String nivel = "";
+                String nivel;
                 while (true){
                     // Leemos el nivel de log que nos pasa el cliente
                     nivel = lector.readLine();

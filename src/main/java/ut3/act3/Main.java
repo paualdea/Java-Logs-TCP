@@ -46,10 +46,21 @@ public class Main {
 
                     break;
                 case "2":
-                    // Recorremos todos los procesos y los cerramos al salir
-                    for (int i = 0; i < procesos.toArray().length; i++) {
-                        // Intentamos cerrar el proceso
-                        procesos.get(i).destroy();
+                    // Obtenemos el SO y si es Windows, cerramos las pestañas a la fuerza
+                    String os = System.getProperty("os.name").toLowerCase();
+                    if (os.contains("win")) {
+                        try {
+                            // Cierra todas las instancias Java en ejecución
+                            new ProcessBuilder("taskkill", "/F", "/IM", "java.exe", "/T").start();
+                        } catch (IOException ignore) {}
+                    }
+                    // Si es Linux o macOS, cerramos de una forma más amigable
+                    else {
+                        // Recorremos todos los procesos y los cerramos al salir
+                        for (int i = 0; i < procesos.toArray().length; i++) {
+                            // Intentamos cerrar el proceso
+                            procesos.get(i).destroy();
+                        }
                     }
 
                     System.out.println("\nCerrando programa...");

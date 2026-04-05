@@ -6,12 +6,15 @@ import java.net.Socket;
 
 public class hiloServidor implements Runnable {
     Socket socket;
-    // Creamos un objeto de la clase que gestiona el fichero logs.txt
-    Logs logs = new Logs();
+    // Creamos un objeto de la clase Logs
+    Logs logs;
 
     // Constructor
-    public hiloServidor(Socket socket) {
+    public hiloServidor(Socket socket, Logs logs) {
         this.socket = socket;
+
+        // Importamos el objeto logs sincronizado
+        this.logs = logs;
     }
 
     @Override

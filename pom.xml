@@ -6,7 +6,7 @@
 
     <groupId>ut3.act3</groupId>
     <artifactId>Java-Logs-TCP</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

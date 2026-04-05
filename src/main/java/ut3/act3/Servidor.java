@@ -11,6 +11,9 @@ public class Servidor {
     final static String DIRECCION = "localhost";
 
     public static void main(String[] args) {
+        // Creamos el objeto que modifica el fichero de texto
+        Logs logs = new Logs();
+
         // Creamos un ServerSocket usando una estructura try-with-resources
         try (ServerSocket servidor = new ServerSocket(PUERTO)) {
             System.out.println("\n\t.: SERVIDOR FUNCIONANDO EN EL PUERTO " + PUERTO + ":.");
@@ -21,7 +24,7 @@ public class Servidor {
                 Socket socket = servidor.accept();
 
                 // Creamos un hilo a partir de la clase hiloServidor y lo iniciamos directamente
-                new Thread(new hiloServidor(socket)).start();
+                new Thread(new hiloServidor(socket, logs)).start();
             }
         }
 

@@ -74,7 +74,7 @@ public class Main {
         // Si se esta usando Windows
         if (os.contains("win")) {
             // Creamos un proceso con ProcessBuilder que lanza con el cmd una nueva ventana de la clase
-            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "start", java, "-cp", ruta, clase);
+            ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "start", "Servicio de Logs", java, "-cp", ruta, clase);
             // Iniciamos el ProcessBuilder
             pb.start();
         } else {
